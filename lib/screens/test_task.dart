@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:test_task/helpers/get_status_color.dart';
 import 'package:test_task/screens/bloc/character_bloc.dart';
+import 'package:test_task/screens/get_data.dart';
 import 'package:test_task/screens/widgets/text_field_widget.dart';
 
 class TestTask extends StatefulWidget {
@@ -16,7 +17,6 @@ class _TestTaskState extends State<TestTask> {
   CharacterBloc characterBloc = CharacterBloc();
   late final TextEditingController textEditingController =
       TextEditingController();
-  final List data = [];
 
   @override
   void initState() {
@@ -36,13 +36,17 @@ class _TestTaskState extends State<TestTask> {
             padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 15.h),
             child: CustomTextField(controller: textEditingController),
           ),
-          for (var i in data) Text("$i"),
           SizedBox(height: 10.h),
           ElevatedButton(
             onPressed: () {
-              data.add(textEditingController.text);
-              textEditingController.clear();
-              setState(() {});
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: ((context) => GetDataScreen(
+                        data: textEditingController.text,
+                      )),
+                ),
+              );
             },
             child: Text('Save'),
             style: ElevatedButton.styleFrom(
@@ -83,7 +87,7 @@ class _TestTaskState extends State<TestTask> {
                   child: ListView.separated(
                     itemCount: state.characterModelList.results!.length,
                     separatorBuilder: (context, index) {
-                      return SizedBox(height: 10.h);
+                      return SizedBox(height: 15.h);
                     },
                     itemBuilder: (context, index) {
                       return Padding(
@@ -96,7 +100,7 @@ class _TestTaskState extends State<TestTask> {
                                 backgroundColor: Colors.transparent,
                                 radius: 35.r,
                                 backgroundImage: NetworkImage(state
-                                    .characterModelList.results!.first.image!),
+                                    .characterModelList.results![index].image!),
                               ),
                               Padding(
                                 padding: EdgeInsets.symmetric(vertical: 20.h),
@@ -118,7 +122,7 @@ class _TestTaskState extends State<TestTask> {
                                       ),
                                     ),
                                     Text(
-                                      state.characterModelList.results!.first
+                                      state.characterModelList.results![index]
                                           .name!,
                                       style: TextStyle(
                                         fontSize: 16.sp,
@@ -134,7 +138,7 @@ class _TestTaskState extends State<TestTask> {
                                           style: TextStyle(
                                               fontSize: 16.sp,
                                               fontWeight: FontWeight.w500,
-                                              color: Colors.grey),
+                                              color: Colors.black),
                                         ),
                                         Text(
                                           state.characterModelList
@@ -143,7 +147,7 @@ class _TestTaskState extends State<TestTask> {
                                           style: TextStyle(
                                             fontSize: 16.sp,
                                             fontWeight: FontWeight.w500,
-                                            color: Colors.grey,
+                                            color: Colors.black,
                                           ),
                                         ),
                                       ],
