@@ -102,6 +102,7 @@ class _TestTaskState extends State<TestTask> {
                                 backgroundImage: NetworkImage(state
                                     .characterModelList.results![index].image!),
                               ),
+                              SizedBox(width: 10.w),
                               Padding(
                                 padding: EdgeInsets.symmetric(vertical: 20.h),
                                 child: Column(
@@ -114,7 +115,7 @@ class _TestTaskState extends State<TestTask> {
                                       style: TextStyle(
                                         fontSize: 10.sp,
                                         fontWeight: FontWeight.w500,
-                                        color: getStatusColor(state
+                                        color: getStatusColorOfStatus(state
                                             .characterModelList
                                             .results![index]
                                             .status
@@ -136,10 +137,12 @@ class _TestTaskState extends State<TestTask> {
                                               .results![index].species
                                               .toString(),
                                           style: TextStyle(
-                                              fontSize: 16.sp,
-                                              fontWeight: FontWeight.w500,
-                                              color: Colors.black),
+                                            fontSize: 16.sp,
+                                            fontWeight: FontWeight.w500,
+                                            color: Colors.yellow,
+                                          ),
                                         ),
+                                        SizedBox(width: 3.w),
                                         Text(
                                           state.characterModelList
                                               .results![index].gender
@@ -147,7 +150,7 @@ class _TestTaskState extends State<TestTask> {
                                           style: TextStyle(
                                             fontSize: 16.sp,
                                             fontWeight: FontWeight.w500,
-                                            color: Colors.black,
+                                            color: Colors.cyanAccent,
                                           ),
                                         ),
                                       ],

@@ -1,6 +1,6 @@
 import 'package:test_task/commons/theme_helper.dart';
 
-getStatusColor(String status) {
+getStatusColorOfStatus(String status) {
   switch (status) {
     case 'Status.ALIVE':
       return ThemeHelper.green;
